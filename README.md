@@ -11,7 +11,7 @@ Updating the code will require a new build. If you do not already have unity ins
 instructions below.
 1. Download the .zip file from the GitHub repository.
 2. Extract the contents of the zipped file into a new file.
-3. Open Unity now or download it at [unity.com/download](https://unity.com/download)
+3. Open Unity 6.5 now or download it at [unity.com/download](https://unity.com/download)
 
    a. Follow the installation guide all the way through the download.
   
