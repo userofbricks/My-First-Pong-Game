@@ -10,9 +10,11 @@ public class Ball : MonoBehaviour
     public float maxStartY = 2f;
     public float paddleHitMultiplier = 1.1f;
 
+    private Vector2 pausedVelocity = Vector2.zero;
+
     void Start()
     {
-        GameManager.instance.gameUI.onStartGame += ResetBall;
+        GameManager.instance.pauseEvent += Pause;
     }
 
     void OnTriggerEnter2D(Collider2D collision)
@@ -47,5 +49,23 @@ public class Ball : MonoBehaviour
     {
         transform.position = new Vector2(startX, Random.Range(-maxStartY, maxStartY));
         InitialPush();
+    }
+
+    public void Pause(bool paused)
+    {
+        if (paused)
+        {
+            pausedVelocity = rb2d.linearVelocity;
+            rb2d.linearVelocity = Vector2.zero;
+        } else
+        {
+            if (pausedVelocity == Vector2.zero)
+            {
+                ResetBall();
+            } else
+            {
+                rb2d.linearVelocity = pausedVelocity;
+            }
+        }
     }
 }

@@ -7,6 +7,11 @@ public class GameUI : MonoBehaviour
     public ScoreText scoreTextLeft, scoreTextRight;
 
     public Action onStartGame;
+    
+    void Start()
+    {
+        GameManager.instance.pauseEvent += Pause;
+    }
 
     public void UpdateScores(int scorePlayer1, int scorePlayer2)
     {
@@ -19,5 +24,10 @@ public class GameUI : MonoBehaviour
         menuObject.SetActive(false);
         //Debug.Log("Start Button Clicked");
         onStartGame?.Invoke();
+    }
+
+    public void Pause(bool paused)
+    {
+        menuObject.SetActive(paused);
     }
 }

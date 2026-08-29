@@ -7,6 +7,13 @@ public class Paddle : MonoBehaviour
     public float id;
     public float moveSpeed = 2f;
 
+    private float pausedVelocity = 0;
+    
+    void Start()
+    {
+        GameManager.instance.pauseEvent += Pause;
+    }
+
     void Update()
     {
         float moveDirection = ProcessInput();
@@ -33,5 +40,17 @@ public class Paddle : MonoBehaviour
     {
         rb2d.linearVelocityY = moveSpeed * moveDirection;
 
+    }
+
+    public void Pause(bool paused)
+    {
+        if (paused)
+        {
+            pausedVelocity = rb2d.linearVelocityY;
+            rb2d.linearVelocityY = 0;
+        } else
+        {
+            rb2d.linearVelocityY = pausedVelocity;
+        }
     }
 }
